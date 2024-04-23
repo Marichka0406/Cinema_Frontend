@@ -1,8 +1,9 @@
-import { styles } from "./HomePage.styles" 
+import { styles } from "./HomePage.styles"
+import MovieCard from '../../components/MovieCard/MovieCard' 
 
 const HomePage = () => {
   return (
-    <>Home Page</>
+    <MovieCard />
   );
 };
 
