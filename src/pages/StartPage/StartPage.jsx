@@ -4,6 +4,7 @@ import MoviesPage from "../MoviesPage/MoviesPage";
 import SeatsPage from "../SeatsPage/SeatsPage";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { useState } from "react";
+import NavBar from "../../components/NavBar/NavBar"; 
 
 const StartPage = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -18,6 +19,7 @@ const StartPage = () => {
         <LoginPage onLogin={handleLogin} />
       ) : (
         <BrowserRouter>
+          <NavBar />
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/movies" element={<MoviesPage />} />
