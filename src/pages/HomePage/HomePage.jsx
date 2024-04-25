@@ -1,10 +1,14 @@
-import { styles } from "./HomePage.styles"
-import MovieCard from '../../components/MovieCard/MovieCard'
-import NavBar from '../../components/NavBar/NavBar' 
+import InfoCards from "../../components/InfoCards/InfoCards";
+import WelcomeBlock from "../../components/WelcomeBlock/WelcomeBlock";
+import { Box } from "@mui/material";
+import { styles } from "./HomePage.styles";
 
 const HomePage = () => {
-  return (<>
-    
+  return (
+    <>
+      <Box sx={styles.wrapper}>
+        <WelcomeBlock />
+      </Box>
     </>
   );
 };
