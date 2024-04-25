@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Card, CardContent, Typography, Box } from '@mui/material';
 import { styles } from './MovieCard.styles';
 
-const MovieCard = () => {
+const MovieCard = ({ movie }) => {
   const [flipped, setFlipped] = useState(false);
 
   const handleFlip = () => {
@@ -14,21 +14,39 @@ const MovieCard = () => {
       <Card sx={styles(flipped).card}>
         <CardContent>
           {!flipped ? (
-            <Box>
-              <Typography gutterBottom variant="h5" component="div">
-                Movie Title
+            <Box sx={styles(flipped).contentBox}>
+              <Typography sx ={styles(flipped).mainTitle} gutterBottom variant="h5" component="div">
+                {movie.title}
               </Typography>
-              <Typography variant="body2" color="text.secondary">
-                Movie Description
+              <Typography sx ={styles(flipped).text} variant="body2" color="text.secondary">
+                Release Date: {movie.release_date}
+              </Typography>
+              <Typography sx ={styles(flipped).text} variant="body2" color="text.secondary">
+                Duration: {movie.duration} min
+              </Typography>
+              <Typography sx ={styles(flipped).text} variant="body2" color="text.secondary">
+                Actors: 
+              </Typography>
+              <Typography sx ={styles(flipped).text} variant="body2" color="text.secondary">
+                Directors: 
+              </Typography>
+              <Typography sx ={styles(flipped).text} variant="body2" color="text.secondary">
+                Genres: 
+              </Typography>
+              <Typography sx ={styles(flipped).text} variant="body2" color="text.secondary">
+                Description: {movie.description}
               </Typography>
             </Box>
           ) : (
-            <Box sx = {styles(flipped).cardContent}>
-              <Typography gutterBottom variant="h5" component="div">
-                Showtimes
+            <Box sx={styles(flipped).cardContent}>
+              <Typography sx ={styles(flipped).mainTitle} gutterBottom variant="h5" component="div">
+                Screenings
               </Typography>
-              <Typography variant="body2" color="text.secondary">
-                10:00 AM, 1:00 PM, 4:00 PM
+              <Typography sx ={styles(flipped).text} variant="body2" color="text.secondary">
+                Date: 22-04-2023
+              </Typography>
+              <Typography sx ={styles(flipped).text} variant="body2" color="text.secondary">
+                Time: 17:00, 18:00
               </Typography>
             </Box>
           )}
