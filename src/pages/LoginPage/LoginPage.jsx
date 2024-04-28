@@ -1,7 +1,9 @@
-import React, { useState } from "react";
+import { useState } from "react";
+import axios from "axios";
+import "react-toastify/dist/ReactToastify.css";
+import { toast } from "react-toastify";
 import {
   Box,
-  TextField,
   Button,
   Grid,
   Paper,
@@ -16,13 +18,22 @@ import { Visibility, VisibilityOff } from "@mui/icons-material";
 import { styles } from "./LoginPage.styles";
 
 const LoginPage = ({ onLogin }) => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [formData, setFormData] = useState({
+    email: "",
+    pwd: "",
+  });
   const [showPassword, setShowPassword] = useState(false);
 
-  const handleLogin = () => {
-    // Викликається, коли користувач натискає кнопку "Увійти"
-    // Тут можна виконати логіку перевірки інформації для входу і передати результат на зовнішню функцію onLogin
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+    setFormData((prevState) => ({
+      ...prevState,
+      [name]: value,
+    }));
+  };
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
     onLogin(true);
   };
 
@@ -32,14 +43,6 @@ const LoginPage = ({ onLogin }) => {
 
   const handleMouseDownPassword = (event) => {
     event.preventDefault();
-  };
-
-  const handleChangeEmail = (e) => {
-    setEmail(e.target.value);
-  };
-
-  const handleChangePassword = (e) => {
-    setPassword(e.target.value);
   };
 
   return (
@@ -58,8 +61,9 @@ const LoginPage = ({ onLogin }) => {
                 id="outlined-adornment-email"
                 type="email"
                 label="Email*"
-                onChange={handleChangeEmail}
-                
+                name="email"
+                value={formData.email}
+                onChange={handleChange}
               />
             </FormControl>
             <FormControl fullWidth sx={styles.input} variant="outlined">
@@ -82,12 +86,14 @@ const LoginPage = ({ onLogin }) => {
                   </InputAdornment>
                 }
                 label="Password"
-                onChange={handleChangePassword}
+                name="pwd"
+                value={formData.pwd}
+                onChange={handleChange}
               />
             </FormControl>
             <Button
               variant="contained"
-              onClick={handleLogin}
+              onClick={handleSubmit}
               sx={styles.button}
             >
               Login

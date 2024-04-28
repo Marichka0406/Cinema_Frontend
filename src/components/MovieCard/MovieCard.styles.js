@@ -4,7 +4,7 @@ export const styles = (flipped) => ({
     },
     card: {
       mt:10,
-      ml:5,
+      ml:4,
       width: 300,
       height: 500,
       transition: "transform 0.85s",
@@ -18,14 +18,24 @@ export const styles = (flipped) => ({
       display:"flex",
       flexDirection:"column",
       gap:"12px",
-      cursore:"pointer"
+      cursore:"pointer",
+      overflowY: 'auto',
+      maxHeight: '500px',
+      '&::-webkit-scrollbar': {
+        display: 'none',
+      },
     },
     mainTitle:{
      color:"#880E4F",
      fontFamily:"Monserrat",
      fontSize:"30px",
-     fontWeight:'500'
-     
+     fontWeight:'bold'  
+    },
+    subtitle:{
+      fontWeight:"bold",
+      color:"#880E4F",
+      fontSize:"18px",
+      fontWeight:'bold'
     },
     text:{
       color:"black",
