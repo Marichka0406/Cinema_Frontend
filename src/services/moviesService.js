@@ -6,7 +6,7 @@ export const getAllMovies = async () => {
         const response = await axios.get(API_URL); 
         return response.data;
     } catch (error) {
-        console.error('Помилка отримання даних про фільми:', error);
+        console.error('Error while receving data about movies:', error);
         throw error;
     }
 };

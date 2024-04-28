@@ -1,12 +1,31 @@
-import React, { useState } from 'react';
-import { Card, CardContent, Typography, Box } from '@mui/material';
+import React, { useState, useEffect } from 'react';
+import { Card, CardContent, Typography, Box, Button } from '@mui/material';
 import { styles } from './MovieCard.styles';
+import { getScreeningsByMovieId } from '../../services/screeningService';
 
 const MovieCard = ({ movie }) => {
   const [flipped, setFlipped] = useState(false);
+  const [screenings, setScreenings] = useState([]);
+
+  useEffect(() => {
+    const fetchScreenings = async () => {
+      try {
+        const data = await getScreeningsByMovieId(movie.id);
+        setScreenings(data);
+      } catch (error) {
+        console.error('Error fetching screenings data:', error);
+      }
+    };
+
+    fetchScreenings();
+  }, [movie.id]);
 
   const handleFlip = () => {
     setFlipped(!flipped);
+  };
+
+  const handleBookTickets = (screeningId) => {
+    // Реалізуйте перехід на сторінку з місцями для обраного сеансу (screeningId)
   };
 
   return (
@@ -15,12 +34,12 @@ const MovieCard = ({ movie }) => {
         <CardContent>
           {!flipped ? (
             <Box sx={styles(flipped).contentBox}>
-               <img src={movie.movie_image} alt={movie.title} style={{ maxWidth: '100%', height:'300px' }} />
+              <img src={movie.movie_image} alt={movie.title} style={{ maxWidth: '100%', height:'300px' }} />
               <Typography sx={styles(flipped).mainTitle} gutterBottom variant="h5" component="div">
                 {movie.title}
               </Typography>
               <Typography sx={styles(flipped).text} variant="body2" color="text.secondary">
-               <span style={styles(flipped).subtitle} >Release Date:</span>  {movie.release_date}
+                <span style={styles(flipped).subtitle} >Release Date:</span>  {movie.release_date}
               </Typography>
               <Typography sx={styles(flipped).text} variant="body2" color="text.secondary">
                 <span style={styles(flipped).subtitle} >Duration:</span> {movie.duration} min
@@ -29,7 +48,7 @@ const MovieCard = ({ movie }) => {
                 <span style={styles(flipped).subtitle} >Actors:</span> {movie.actors.map(actor => `${actor.first_name} ${actor.last_name}`).join(', ')}
               </Typography>
               <Typography sx={styles(flipped).text} variant="body2" color="text.secondary">
-                <span style={styles(flipped).subtitle} >Directors:</span>{movie.directors.map(director => `${director.first_name} ${director.last_name}`).join(', ')}
+                <span style={styles(flipped).subtitle} >Director(s):</span>{movie.directors.map(director => `${director.first_name} ${director.last_name}`).join(', ')}
               </Typography>
               <Typography sx={styles(flipped).text} variant="body2" color="text.secondary">
                 <span style={styles(flipped).subtitle} >Genres:</span> {movie.genres.map(genre => genre.name).join(', ')}
@@ -43,12 +62,18 @@ const MovieCard = ({ movie }) => {
               <Typography sx={styles(flipped).mainTitle} gutterBottom variant="h5" component="div">
                 Screenings
               </Typography>
-              <Typography sx={styles(flipped).text} variant="body2" color="text.secondary">
-                Date: 22-04-2023
-              </Typography>
-              <Typography sx={styles(flipped).text} variant="body2" color="text.secondary">
-                Time: 17:00, 18:00
-              </Typography>
+              {screenings.map(screening => (
+                <Box key={screening.id}>
+                  <Typography sx={{...styles(flipped).text, marginTop: '15px'}} variant="body2" color="text.secondary">
+                    <span style={styles(flipped).subtitle}>Date:</span>  {screening.date_time.split('T')[0]}
+                  </Typography>
+                  <Typography sx={styles(flipped).text} variant="body2" color="text.secondary">
+                    <span style={styles(flipped).subtitle}>Hours:</span> {screening.date_time.split('T')[1].slice(0, 5).split(', ').map(time => (
+                      <Button sx={styles(flipped).button} key={time} variant="outlined" onClick={() => handleBookTickets(screening.id, time)}>{time}</Button>
+                    ))}
+                  </Typography>
+                </Box>
+              ))}
             </Box>
           )}
         </CardContent>

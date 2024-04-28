@@ -1,4 +1,3 @@
-import InfoCards from "../../components/InfoCards/InfoCards";
 import WelcomeBlock from "../../components/WelcomeBlock/WelcomeBlock";
 import { Box } from "@mui/material";
 import { styles } from "./HomePage.styles";
