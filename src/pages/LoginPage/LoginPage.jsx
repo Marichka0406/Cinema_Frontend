@@ -1,5 +1,5 @@
 import { useState } from "react";
-import axios from "axios";
+import { loginService } from "../../services/loginService"; 
 import "react-toastify/dist/ReactToastify.css";
 import { toast } from "react-toastify";
 import {
@@ -20,8 +20,10 @@ import { styles } from "./LoginPage.styles";
 const LoginPage = ({ onLogin }) => {
   const [formData, setFormData] = useState({
     email: "",
-    pwd: "",
+    password: "",
   });
+
+
   const [showPassword, setShowPassword] = useState(false);
 
   const handleChange = (event) => {
@@ -34,7 +36,21 @@ const LoginPage = ({ onLogin }) => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    onLogin(true);
+    try {
+      const response = await loginService(formData); 
+      if (response.status === 200) {
+        sessionStorage.setItem('userId', response.id);
+        sessionStorage.setItem('username', response.username);
+        sessionStorage.setItem('role', response.role);
+        onLogin(true);
+      } else {
+        toast.error("Login failed. Please try again.");
+        onLogin(false);
+      }
+    } catch (error) {
+      // Помилка під час виконання запиту
+      toast.error(error);
+    }
   };
 
   const handleClickShowPassword = () => {
@@ -86,8 +102,8 @@ const LoginPage = ({ onLogin }) => {
                   </InputAdornment>
                 }
                 label="Password"
-                name="pwd"
-                value={formData.pwd}
+                name="password"
+                value={formData.password}
                 onChange={handleChange}
               />
             </FormControl>

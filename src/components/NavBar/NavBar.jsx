@@ -51,7 +51,6 @@ const NavBar = ({ window }) => {
       onClose={handleProfileMenuClose}
       sx={styles.navBarText}
     >
-      <MenuItem onClick={handleProfileMenuClose}>My profile</MenuItem>
       <MenuItem onClick={() => console.log("Logout clicked")}>
         <Typography>Logout</Typography>
         <LogoutIcon sx={{ ml: '8px' }}/>
@@ -144,7 +143,7 @@ const NavBar = ({ window }) => {
           </Box>
         </Drawer>
       </nav>
-      {profileMenu} {/* Меню "Профіль" */}
+      {profileMenu} 
     </Box>
   );
 }

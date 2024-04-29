@@ -1,4 +1,6 @@
 import axios from 'axios';
+import { toast } from 'react-toastify';
+
 const API_URL = 'http://localhost:3000/movies';
 
 export const getAllMovies = async () => {
@@ -6,7 +8,7 @@ export const getAllMovies = async () => {
         const response = await axios.get(API_URL); 
         return response.data;
     } catch (error) {
-        console.error('Error while receving data about movies:', error);
+        toast.error('Error while receiving data about movies');
         throw error;
     }
 };
