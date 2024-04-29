@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Card, CardContent, Typography, Box, Button } from '@mui/material';
 import { styles } from './MovieCard.styles';
 import { getScreeningsByMovieId } from '../../services/screeningService';
@@ -6,6 +7,7 @@ import { getScreeningsByMovieId } from '../../services/screeningService';
 const MovieCard = ({ movie }) => {
   const [flipped, setFlipped] = useState(false);
   const [screenings, setScreenings] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchScreenings = async () => {
@@ -25,7 +27,7 @@ const MovieCard = ({ movie }) => {
   };
 
   const handleBookTickets = (screeningId) => {
-    // Реалізуйте перехід на сторінку з місцями для обраного сеансу (screeningId)
+    navigate(`/tickets/${screeningId}`);
   };
 
   return (

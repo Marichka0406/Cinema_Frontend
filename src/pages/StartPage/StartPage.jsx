@@ -1,7 +1,7 @@
 import LoginPage from "../LoginPage/LoginPage";
 import HomePage from "../HomePage/HomePage";
 import MoviesPage from "../MoviesPage/MoviesPage";
-import SeatsPage from "../SeatsPage/SeatsPage";
+import BuyTicketsPage from "../ButTicketsPage/BuyTicketsPage";
 import AdminMoviesPage from "../AdminMoviesPage/AdminMoviesPage";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { AuthProvider, useAuth } from "../../contexts/authContext";
@@ -25,7 +25,7 @@ const Router = () => {
           <>
             <Route path="/home" element={<HomePage />} />
             <Route path="/movies" element={<MoviesPage />} />
-            <Route path="/seats" element={<SeatsPage />} />
+            <Route path="/tickets/:screeningId" element={<BuyTicketsPage />} />
             <Route path="/admin/movies" element={<AdminMoviesPage />} />
           </>
         ) : null}
