@@ -1,8 +1,9 @@
-import { styles } from "./SeatsPage.styles" 
+import { styles } from "./SeatsPage.styles"
+import NavBar from "../../components/NavBar/NavBar"; 
 
 const SeatsPage = () => {
   return (
-    <>Seats Page</>
+    <NavBar />
   );
 };
 

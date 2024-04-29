@@ -1,4 +1,6 @@
 import { useState } from 'react';
+import { useAuth } from '../../contexts/authContext';
+import { useNavigate } from 'react-router-dom';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -20,14 +22,18 @@ import { Link } from 'react-router-dom';
 import { styles } from './NavBar.styles';
 
 const drawerWidth = 240;
-const navItems = [
-  { text: "Home", icon: <HomeIcon sx={{ mr: '8px' }}/>, path: "/" },
-  { text: "Movies", icon: <VideocamOutlinedIcon sx={{ mr: '8px' }}/>, path: "/movies" },
-];
 
 const NavBar = ({ window }) => {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [profileMenuAnchor, setProfileMenuAnchor] = useState(null);
+  const username = sessionStorage.getItem('username');
+  const navigate = useNavigate();
+  const { isAdmin, handleLogout } = useAuth();
+
+  const navItems = [
+    { text: "Home", icon: <HomeIcon sx={{ mr: '8px' }}/>, path: "/home" },
+    { text: "Movies", icon: <VideocamOutlinedIcon sx={{ mr: '8px' }}/>, path: isAdmin ? "/admin/movies" : "/movies" },
+  ];
 
   const handleDrawerToggle = () => {
     setMobileOpen((prevState) => !prevState);
@@ -41,6 +47,11 @@ const NavBar = ({ window }) => {
     setProfileMenuAnchor(null);
   };
 
+  const handleLogoutClick = () => {
+    handleLogout();
+    navigate('/')
+  };
+
   const container =
     window !== undefined ? () => window().document.body : undefined;
 
@@ -51,7 +62,7 @@ const NavBar = ({ window }) => {
       onClose={handleProfileMenuClose}
       sx={styles.navBarText}
     >
-      <MenuItem onClick={() => console.log("Logout clicked")}>
+      <MenuItem onClick={handleLogoutClick}>
         <Typography>Logout</Typography>
         <LogoutIcon sx={{ ml: '8px' }}/>
       </MenuItem>
@@ -98,7 +109,7 @@ const NavBar = ({ window }) => {
             onClick={handleProfileMenuOpen} 
           >
             <AccountCircleIcon sx={{mr: '8px'}} />
-            <Typography sx={styles.profileText}>John Doe</Typography> {/* Захардкоджене ім'я користувача */}
+            <Typography sx={styles.profileText}>{username}</Typography> {/* Захардкоджене ім'я користувача */}
           </IconButton>
         </Toolbar>
       </AppBar>

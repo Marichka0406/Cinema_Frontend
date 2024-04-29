@@ -1,17 +1,16 @@
 import WelcomeBlock from "../../components/WelcomeBlock/WelcomeBlock";
-import { Box } from "@mui/material";
-import { styles } from "./HomePage.styles";
 import NavBar from "../../components/NavBar/NavBar";
+import { Box } from "@mui/material";
 
-const HomePage = () => {
+const AdminMoviesPage = () => {
   return (
     <>
       <NavBar />
-      <Box sx={styles.wrapper}>
-        <WelcomeBlock />
+      <Box>
+        Hellooo
       </Box>
     </>
   );
 };
 
-export default HomePage;
+export default AdminMoviesPage;

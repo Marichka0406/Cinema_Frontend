@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { useAuth } from '../../contexts/authContext';
+import { useNavigate } from "react-router-dom";
 import { loginService } from "../../services/loginService"; 
 import "react-toastify/dist/ReactToastify.css";
 import { toast } from "react-toastify";
@@ -23,7 +25,8 @@ const LoginPage = ({ onLogin }) => {
     password: "",
   });
 
-
+  const { handleLogin } = useAuth();
+  const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
 
   const handleChange = (event) => {
@@ -42,10 +45,13 @@ const LoginPage = ({ onLogin }) => {
         sessionStorage.setItem('userId', response.id);
         sessionStorage.setItem('username', response.username);
         sessionStorage.setItem('role', response.role);
-        onLogin(true);
+        const isAdminOrSuperAdmin = response.role === 'Admin' || response.role === 'SuperAdmin';
+        handleLogin(true, isAdminOrSuperAdmin);
+        navigate('/home') 
+
       } else {
         toast.error("Login failed. Please try again.");
-        onLogin(false);
+        handleLogin(false, false); 
       }
     } catch (error) {
       // Помилка під час виконання запиту

@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { Grid } from "@mui/material";
 import MovieCard from "../../components/MovieCard/MovieCard";
-import { getAllMovies } from '../../services/moviesService';
+import { getAllMovies } from "../../services/moviesService";
+import NavBar from "../../components/NavBar/NavBar";
 
 const MoviesPage = () => {
   const [movies, setMovies] = useState([]);
@@ -12,7 +13,7 @@ const MoviesPage = () => {
         const moviesData = await getAllMovies();
         setMovies(moviesData);
       } catch (error) {
-        console.error('Error fetching movies:', error);
+        console.error("Error fetching movies:", error);
       }
     }
 
@@ -20,13 +21,16 @@ const MoviesPage = () => {
   }, []);
 
   return (
-    <Grid container spacing={2}>
-      {movies.map((movie) => (
-        <Grid key={movie.id} item xs={12} sm={6} md={4} lg={3}>
-          <MovieCard movie={movie} />
-        </Grid>
-      ))}
-    </Grid>
+    <>
+      <NavBar />
+      <Grid container spacing={2}>
+        {movies.map((movie) => (
+          <Grid key={movie.id} item xs={12} sm={6} md={4} lg={3}>
+            <MovieCard movie={movie} />
+          </Grid>
+        ))}
+      </Grid>
+    </>
   );
 };
 

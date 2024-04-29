@@ -3,8 +3,10 @@ import { Link } from "react-router-dom";
 import {Box, Button, Typography} from "@mui/material";
 import TheaterImage from "../../images/cinema.jpg"; 
 import { styles } from "./WelcomeBlock.styles";
+import { useAuth } from '../../contexts/authContext';
 
 const WelcomeBlock = () => {
+  const { isAdmin } = useAuth();
   return (
     <>
     <Box
@@ -16,7 +18,7 @@ const WelcomeBlock = () => {
       <Typography sx={styles(TheaterImage).welcomeBlockText} >
         Are you ready for an unforgettable cinematic experience?
       </Typography>
-      <Link to="/movies" style={{ textDecoration: "none" }}>
+      <Link to= {isAdmin ? "/admin/movies" : "/movies"} style={{ textDecoration: "none" }}>
         <Button variant="contained" sx={styles(TheaterImage).welcomeButton}>
           Go to Movies
         </Button>

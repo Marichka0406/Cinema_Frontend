@@ -2,32 +2,35 @@ import LoginPage from "../LoginPage/LoginPage";
 import HomePage from "../HomePage/HomePage";
 import MoviesPage from "../MoviesPage/MoviesPage";
 import SeatsPage from "../SeatsPage/SeatsPage";
+import AdminMoviesPage from "../AdminMoviesPage/AdminMoviesPage";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { useState } from "react";
-import NavBar from "../../components/NavBar/NavBar"; 
+import { AuthProvider, useAuth } from "../../contexts/authContext";
 
 const StartPage = () => {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  return (
+    <AuthProvider>
+      <Router />
+    </AuthProvider>
+  );
+};
 
-  const handleLogin = (isAuthenticated) => {
-    setIsAuthenticated(isAuthenticated);
-  };
+const Router = () => {
+  const { isAuthenticated } = useAuth();
 
   return (
-    <>
-      {!isAuthenticated ? (
-        <LoginPage onLogin={handleLogin} />
-      ) : (
-        <BrowserRouter>
-          <NavBar />
-          <Routes>
-            <Route path="/" element={<HomePage />} />
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<LoginPage />} />
+        {isAuthenticated ? (
+          <>
+            <Route path="/home" element={<HomePage />} />
             <Route path="/movies" element={<MoviesPage />} />
             <Route path="/seats" element={<SeatsPage />} />
-          </Routes>
-        </BrowserRouter>
-      )}
-    </>
+            <Route path="/admin/movies" element={<AdminMoviesPage />} />
+          </>
+        ) : null}
+      </Routes>
+    </BrowserRouter>
   );
 };
 
