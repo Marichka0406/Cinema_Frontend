@@ -5,7 +5,7 @@ import { styles } from "./BuyTicketModal.styles";
 import CloseIcon from "@mui/icons-material/Close";
 import { createTicket } from "../../services/ticketService"; // Імпортуємо сервіс для створення квитка
 
-const BuyTicketModal = ({ isOpen, onClose, seatId, handleBuyTicket }) => {
+const BuyTicketModal = ({ isOpen, onClose, seatId }) => {
   const { screeningId } = useParams();
 
   const handleBuyTicketClick = async () => {
@@ -14,7 +14,7 @@ const BuyTicketModal = ({ isOpen, onClose, seatId, handleBuyTicket }) => {
       // Виконуємо логіку покупки квитка, викликаючи сервіс createTicket
       await createTicket({ seat_id: seatId, user_id: userId, screening_id: screeningId });
       console.log(`Ticket bought successfully for seat ${seatId}`);
-      handleBuyTicket(true)
+      window.location.reload(); 
       onClose();
     } catch (error) {
       console.error("Error buying ticket:", error);

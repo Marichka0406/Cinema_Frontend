@@ -5,7 +5,7 @@ import useMediaQuery from "@mui/material/useMediaQuery";
 import { styles } from "./SeatsTable.styles";
 import BuyTicketModal from "../BuyTicketModal/BuyTicketModal";
 
-const SeatsTable = ({ hall, existingTickets, handleBuyTicket }) => {
+const SeatsTable = ({ hall, existingTickets}) => {
   const { name, rows } = hall;
   const theme = useTheme();
   const isSmallScreen = useMediaQuery(theme.breakpoints.down("sm"));
@@ -81,7 +81,7 @@ const SeatsTable = ({ hall, existingTickets, handleBuyTicket }) => {
           </TableBody>
         </Table>
       </TableContainer>
-      <BuyTicketModal isOpen={isModalOpen} handleBuyTicket={handleBuyTicket} onClose={handleCloseModal} seatId={selectedSeat ? selectedSeat.seatId : null} />
+      <BuyTicketModal isOpen={isModalOpen} onClose={handleCloseModal} seatId={selectedSeat ? selectedSeat.seatId : null} />
     </>
   );
 };

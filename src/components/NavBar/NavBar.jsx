@@ -28,7 +28,8 @@ const NavBar = ({ window }) => {
   const [profileMenuAnchor, setProfileMenuAnchor] = useState(null);
   const username = sessionStorage.getItem('username');
   const navigate = useNavigate();
-  const { isAdmin, handleLogout } = useAuth();
+  const { handleLogout } = useAuth();
+  const isAdmin = sessionStorage.getItem('isAdmin') === 'true'; 
 
   const navItems = [
     { text: "Home", icon: <HomeIcon sx={{ mr: '8px' }}/>, path: "/home" },

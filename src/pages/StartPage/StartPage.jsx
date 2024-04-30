@@ -15,7 +15,8 @@ const StartPage = () => {
 };
 
 const Router = () => {
-  const { isAuthenticated } = useAuth();
+  const { isAuthenticated } = useAuth(); // Отримуємо isAdmin з контексту
+  const isAdmin = sessionStorage.getItem('isAdmin') === 'true';
 
   return (
     <BrowserRouter>
@@ -26,7 +27,9 @@ const Router = () => {
             <Route path="/home" element={<HomePage />} />
             <Route path="/movies" element={<MoviesPage />} />
             <Route path="/tickets/:screeningId" element={<BuyTicketsPage />} />
-            <Route path="/admin/movies" element={<AdminMoviesPage />} />
+            {isAdmin ? (
+              <Route path="/admin/movies" element={<AdminMoviesPage />} />
+            ) : null}
           </>
         ) : null}
       </Routes>

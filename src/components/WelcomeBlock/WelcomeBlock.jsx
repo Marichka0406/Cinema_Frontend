@@ -3,10 +3,9 @@ import { Link } from "react-router-dom";
 import {Box, Button, Typography} from "@mui/material";
 import TheaterImage from "../../images/cinema.jpg"; 
 import { styles } from "./WelcomeBlock.styles";
-import { useAuth } from '../../contexts/authContext';
 
 const WelcomeBlock = () => {
-  const { isAdmin } = useAuth();
+  const isAdmin = sessionStorage.getItem('isAdmin') === 'true';
   return (
     <>
     <Box

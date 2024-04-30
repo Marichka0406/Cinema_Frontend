@@ -8,7 +8,6 @@ import { getTicketsByScreeningId } from "../../services/ticketService"; // Шл�
 const BuyTicketsPage = () => {
   const [hall, setHall] = useState(null);
   const [existingTickets, setExistingTickets] = useState([]);
-  const [ticketBought, setTicketBought] = useState(false);
   const { screeningId } = useParams();
 
   useEffect(() => {
@@ -27,12 +26,12 @@ const BuyTicketsPage = () => {
     };
 
     fetchHallInfo();
-  }, [screeningId, ticketBought]);
+  }, [screeningId]);
 
   return (
     <>
       <NavBar />
-      {hall ? <SeatsTable hall={hall} existingTickets={existingTickets} handleBuyTicket={setTicketBought}/> : <p>No hall information available</p>}
+      {hall ? <SeatsTable hall={hall} existingTickets={existingTickets}/> : <p>No hall information available</p>}
     </>
   );
 };
