@@ -127,7 +127,7 @@ const AdminMoviesTable = ({ movies }) => {
 
   return (
     <>
-      <div style={{ ...styles.topContainer, marginTop: "70px" }}>
+      <div style={{ ...styles.topContainer, marginTop: "75px" }}>
         <Button sx={styles.button} onClick={() => handleOpenModal(null)} startIcon={<AddIcon />}>
           Add Movie
         </Button>

@@ -3,7 +3,7 @@ export const styles = (flipped) => ({
       perspective: '1000px'
     },
     card: {
-      mt:10,
+      mt:5,
       ml:4,
       width: 300,
       height: 500,

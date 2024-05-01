@@ -3,6 +3,7 @@ import HomePage from "../HomePage/HomePage";
 import MoviesPage from "../MoviesPage/MoviesPage";
 import BuyTicketsPage from "../ButTicketsPage/BuyTicketsPage";
 import AdminMoviesPage from "../AdminMoviesPage/AdminMoviesPage";
+import StatisticsPage from "../StatisticsPage/StatisticsPage";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { AuthProvider, useAuth } from "../../contexts/authContext";
 
@@ -28,7 +29,10 @@ const Router = () => {
             <Route path="/movies" element={<MoviesPage />} />
             <Route path="/tickets/:screeningId" element={<BuyTicketsPage />} />
             {isAdmin ? (
+              <>
               <Route path="/admin/movies" element={<AdminMoviesPage />} />
+              <Route path="/statistics" element={<StatisticsPage />} />
+               </>
             ) : null}
           </>
         ) : null}

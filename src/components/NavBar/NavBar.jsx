@@ -14,6 +14,7 @@ import LogoutIcon from '@mui/icons-material/Logout';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import HomeIcon from '@mui/icons-material/Home';
 import VideocamOutlinedIcon from '@mui/icons-material/VideocamOutlined';
+import BarChartOutlinedIcon from '@mui/icons-material/BarChartOutlined';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Menu from '@mui/material/Menu';
@@ -35,6 +36,10 @@ const NavBar = ({ window }) => {
     { text: "Home", icon: <HomeIcon sx={{ mr: '8px' }}/>, path: "/home" },
     { text: "Movies", icon: <VideocamOutlinedIcon sx={{ mr: '8px' }}/>, path: isAdmin ? "/admin/movies" : "/movies" },
   ];
+
+  if (isAdmin) {
+    navItems.push({ text: "Statistics", icon: <BarChartOutlinedIcon  sx={{ mr: '8px' }}/>, path: "/statistics" });
+  }
 
   const handleDrawerToggle = () => {
     setMobileOpen((prevState) => !prevState);
