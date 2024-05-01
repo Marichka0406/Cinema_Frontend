@@ -41,6 +41,9 @@ const AdminMoviesTable = ({ movies }) => {
   const [allDirectors, setAllDirectors] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
 
+  const userRole = sessionStorage.getItem("role");
+  const isSuperAdmin = userRole === "SuperAdmin";
+
   useEffect(() => {
     const fetchData = async () => {
       const genresData = await getAllGenres();
@@ -234,7 +237,8 @@ const AdminMoviesTable = ({ movies }) => {
                   />
                   <DeleteIcon
                     onClick={() => handleDeleteMovie(movie.id)}
-                    sx={styles.actionIcon}
+                    sx={{ ...styles.actionIcon, cursor: isSuperAdmin ? "pointer" : "not-allowed" }}
+                    disabled={!isSuperAdmin}
                   />
                 </TableCell>
               </TableRow>
