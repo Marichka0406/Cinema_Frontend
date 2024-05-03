@@ -28,6 +28,7 @@ export const createPrice = async (priceData) => {
 
 // Оновлення ціни за ID
 export const updatePrice = async (priceId, priceData) => {
+    console.log(priceData)
     try {
         const response = await axios.put(`${API_URL}/${priceId}`, priceData);
         toast.success('Price updated successfully');

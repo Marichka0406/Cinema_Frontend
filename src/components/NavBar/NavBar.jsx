@@ -19,6 +19,8 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
+import LocalOfferOutlinedIcon from '@mui/icons-material/LocalOfferOutlined';
+import AccessTimeOutlinedIcon from '@mui/icons-material/AccessTimeOutlined';
 import { Link } from 'react-router-dom';
 import { styles } from './NavBar.styles';
 
@@ -38,7 +40,11 @@ const NavBar = ({ window }) => {
   ];
 
   if (isAdmin) {
-    navItems.push({ text: "Statistics", icon: <BarChartOutlinedIcon  sx={{ mr: '8px' }}/>, path: "/statistics" });
+    navItems.push(
+      { text: "Screenings", icon: <AccessTimeOutlinedIcon  sx={{ mr: '8px' }}/>, path: "/screenings" },
+      { text: "Prices", icon: <LocalOfferOutlinedIcon sx={{ mr: '8px' }}/>, path: "/prices" },
+      { text: "Statistics", icon: <BarChartOutlinedIcon  sx={{ mr: '8px' }}/>, path: "/statistics" },
+    );
   }
 
   const handleDrawerToggle = () => {

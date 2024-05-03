@@ -18,6 +18,16 @@ export const getAllMovies = async () => {
     }
 };
 
+export const getAllMovieTitles = async () => {
+    try {
+      const response = await axios.get(`${API_URL}/titles`);
+      return response.data;
+    } catch (error) {
+        toast.error('Error while fetching movie titles:');
+      throw error;
+    }
+};
+
 export const createMovie = async (formData) => {
     try {
         const token = sessionStorage.getItem('role'); // Отримуємо роль з sessionStorage

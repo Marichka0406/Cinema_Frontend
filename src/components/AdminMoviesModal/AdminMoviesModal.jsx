@@ -19,9 +19,9 @@ const AdminMoviesModal = ({
   allGenres,
   allActors,
   allDirectors,
+  selectedMovie
 }) => {
   const {
-    selectedMovie,
     title,
     releaseDate,
     duration,

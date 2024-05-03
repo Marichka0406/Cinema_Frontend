@@ -1,11 +1,10 @@
 export const styles = {
     topContainer:{
      display:"flex",
-     justifyContent: "space-between",
      marginBottom:"5px"
     },
     searchBar:{
-        marginRight:"5px",
+        marginLeft:"5px",
         backgroundColor: '#EDF5FF',
         '& label': {
           color: '#673AB7',

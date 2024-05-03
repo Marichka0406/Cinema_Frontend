@@ -37,7 +37,8 @@ export const styles = {
         borderRadius: '10px',
         fontFamily: 'Montserrat',
         fontWeight: '500',
-        fontSize: '16px'
+        fontSize: '16px',
+        marginRight:"15px"
     },
     cancelButton:{
         background: 'linear-gradient(to right, #B71C1C, #880E4F, #673AB7)',

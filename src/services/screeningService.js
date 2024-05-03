@@ -21,14 +21,25 @@ export const getScreeningsByMovieId = async (movieId) => {
 
 // Отримання сеансу за датою та назвою фільму
 export const getScreeningByDateAndMovieTitle = async (date, movieTitle) => {
+    console.log(date);
     try {
-        const response = await axios.get(`${API_URL}?date=${date}&movieTitle=${movieTitle}`);
+        const response = await axios.post(`${API_URL}/screening-by-date-and-title`, { date, movieTitle });
         return response.data;
     } catch (error) {
         toast.error('Error while receiving screening data');
         throw error;
     }
 };
+
+export const getScreeningDatesByMovieTitle = async (movieTitle) => {
+    try {
+      const response = await axios.post(`${API_URL}/dates`, { movieTitle }); // Передача movieTitle у тілі запиту
+      return response.data;
+    } catch (error) {
+      toast.error('Error while fetching screening dates by movie title:');
+      throw error;
+    }
+  };
 
 // Створення нового сеансу
 export const createScreening = async (screeningData) => {

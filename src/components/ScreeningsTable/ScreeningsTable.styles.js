@@ -2,35 +2,7 @@ export const styles = {
     topContainer:{
      display:"flex",
      marginBottom:"5px",
-     gap:"10px",
-    },
-    actionIcon:{
-        color: '#880E4F', 
-        cursor:'pointer', 
-        mr:"2px"
-    },
-    headerText:{
-        fontSize:"25px",
-        fontWeight:"bold",
-        fontFamily:"Monserrat",
-        color:"#880E4F",
-    },
-    mainText:{
-        fontFamily:"Monserrat",
-        fontSize:"20px",
-        cursor:"default"
-    },
-    button:{
-        background: 'linear-gradient(to right, #B71C1C, #880E4F, #673AB7)',
-        color: '#fff',
-        '&:hover': {
-          background: 'linear-gradient(to right, #77052F, #880E4F, #0A0A53)',
-        },
-        borderRadius: '10px',
-        fontFamily: 'Montserrat',
-        fontWeight: '500',
-        fontSize: '16px',
-        marginLeft:"10px"
+     marginTop: "75px"
     },
     searchBar:{
         marginLeft:"5px",
@@ -68,5 +40,33 @@ export const styles = {
           }, 
         }
     },
+    actionIcon:{
+        color: '#880E4F', 
+        cursor:'pointer', 
+        mr:"2px"
+    },
+    headerText:{
+        fontSize:"25px",
+        fontWeight:"bold",
+        fontFamily:"Monserrat",
+        color:"#880E4F" 
+    },
+    mainText:{
+        fontFamily:"Monserrat",
+        fontSize:"20px",
+        cursor:"default"
+    },
+    button:{
+        background: 'linear-gradient(to right, #B71C1C, #880E4F, #673AB7)',
+        color: '#fff',
+        '&:hover': {
+          background: 'linear-gradient(to right, #77052F, #880E4F, #0A0A53)',
+        },
+        borderRadius: '10px',
+        fontFamily: 'Montserrat',
+        fontWeight: '500',
+        fontSize: '16px',
+        marginLeft:"10px"
+    }
 };
   
