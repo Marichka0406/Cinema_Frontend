@@ -1,3 +1,4 @@
+// ...
 import React from "react";
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Button, Typography } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
@@ -5,7 +6,7 @@ import useMediaQuery from "@mui/material/useMediaQuery";
 import { styles } from "./SeatsTable.styles";
 import BuyTicketModal from "../BuyTicketModal/BuyTicketModal";
 
-const SeatsTable = ({ hall, existingTickets}) => {
+const SeatsTable = ({ hall, existingTickets }) => {
   const { name, rows } = hall;
   const theme = useTheme();
   const isSmallScreen = useMediaQuery(theme.breakpoints.down("sm"));
@@ -22,7 +23,6 @@ const SeatsTable = ({ hall, existingTickets}) => {
     setSelectedSeat(null);
   };
 
-  
   const isTicketExisting = (seatId) => {  
     return !!existingTickets?.some(ticket => ticket.seat_id === seatId);
   };
@@ -46,25 +46,21 @@ const SeatsTable = ({ hall, existingTickets}) => {
                 <TableCell align="center" sx={styles.buttons}>
                   {row.seats.map((seat) => (
                     <Button
-                    sx={{  
+                      sx={{  
                         minWidth: 80,
                         padding: "8px 16px",
                         borderRadius: 4,
-                        border:  '2px solid green',
+                        border:  isTicketExisting(seat.id) ? '2px solid red' : '2px solid green',
                         color: 'green',
                         "&:hover": {
-                          backgroundColor:  'green',
+                          backgroundColor: isTicketExisting(seat.id) ? 'red' : 'green',
                           color: 'white',
                         },
-                        "&.Mui-disabled": { 
-                          backgroundColor: 'red',
-                          color: 'white',
-                          border: '2px solid red',
-                        },
+                        // Видалено стилізацію для вимкненої кнопки
                       }}
                       key={seat.id}
                       variant="outlined"
-                      disabled={isTicketExisting(seat.id)}
+                      disabled={isTicketExisting(seat.id) || !row.price} // Додано умову для перевірки ціни
                       onClick={() => handleSeatClick(row.id, seat.id)} 
                     >
                       {seat.number}

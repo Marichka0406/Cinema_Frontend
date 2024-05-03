@@ -14,6 +14,8 @@ const MoviesPage = () => {
     async function fetchMovies() {
       try {
         const moviesData = await getAllMovies();
+        // Сортуємо фільми за датою виходу
+        moviesData.sort((a, b) => new Date(b.release_date) - new Date(a.release_date));
         setMovies(moviesData);
       } catch (error) {
         console.error("Error fetching movies:", error);

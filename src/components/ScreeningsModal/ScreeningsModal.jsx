@@ -29,6 +29,8 @@ const ScreeningModal = ({ open, handleClose, screening }) => {
     const fetchMovies = async () => {
       try {
         const movies = await getAllMovieTitles();
+        // Сортування фільмів за назвою
+        movies.sort((a, b) => a.title.localeCompare(b.title));
         setMovieList(movies);
       } catch (error) {
         console.error("Error fetching movie titles:", error);
